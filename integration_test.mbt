@@ -19,7 +19,7 @@ test "connect_to_live_api" {
         Ok(_) => ()
         Err(_) => ()
       }
-    Err(e) =>
+    Err(_e) =>
       // Connection failed - this is expected if API is not running
       // Don't fail the test, just note it
       ()
@@ -271,29 +271,29 @@ test "callback_registration" {
 
   // Register error callback
   let client = set_error_callback(client, fn(
-    code : ErrorCode,
-    msg : String,
+    _code : ErrorCode,
+    _msg : String,
   ) -> Unit {
     ()
   })
 
   // Register account summary callback
   let client = set_account_summary_callback(client, fn(
-    req_id : Int,
-    account : String,
-    tag : String,
-    value : String,
-    currency : String,
+    _req_id : Int,
+    _account : String,
+    _tag : String,
+    _value : String,
+    _currency : String,
   ) -> Unit {
     ()
   })
 
   // Register position callback
   let client = set_position_callback(client, fn(
-    account : String,
-    contract : Contract,
-    pos : Double,
-    avg_cost : Double,
+    _account : String,
+    _contract : Contract,
+    _pos : Double,
+    _avg_cost : Double,
   ) -> Unit {
     ()
   })
@@ -372,7 +372,7 @@ test "request_managed_accounts_read_only" {
     Ok(client) => {
       // Register callback to receive managed accounts
       let client = set_managed_accounts_callback(client, fn(
-        accounts_list : String,
+        _accounts_list : String,
       ) -> Unit {
         // Callback invoked with accounts list
         ()

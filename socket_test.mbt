@@ -7,8 +7,8 @@
 test "socket_error_placeholder_message_format" {
   // Test the placeholder error message format
   // This verifies the expected error message when FFI is not implemented
-  let expected_part1 = "Socket FFI not yet implemented"
-  let expected_part2 = "target-specific implementation"
+  let _expected_part1 = "Socket FFI not yet implemented"
+  let _expected_part2 = "target-specific implementation"
 
   // We can't directly test the enum, but we can verify the message format
   // by checking that both parts are present in the expected format

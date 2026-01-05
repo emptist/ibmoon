@@ -4,10 +4,10 @@
 test "set_tick_price_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_tick_price_callback(client, fn(
-    req_id : Int,
-    tick_type : TickType,
-    price : Double,
-    size : Int64,
+    _req_id : Int,
+    _tick_type : TickType,
+    _price : Double,
+    _size : Int64,
   ) -> Unit {
     ()
   })
@@ -21,9 +21,9 @@ test "set_tick_price_callback" {
 test "set_tick_size_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_tick_size_callback(client, fn(
-    req_id : Int,
-    tick_type : TickType,
-    size : Int,
+    _req_id : Int,
+    _tick_type : TickType,
+    _size : Int,
   ) -> Unit {
     ()
   })
@@ -37,16 +37,16 @@ test "set_tick_size_callback" {
 test "set_order_status_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_order_status_callback(client, fn(
-    order_id : Int,
-    status : String,
-    filled : Double,
-    remaining : Double,
-    avg_fill_price : Double,
-    perm_id : Int,
-    parent_id : Int,
-    last_fill_price : Double,
-    client_id : Int,
-    why_held : String,
+    _order_id : Int,
+    _status : String,
+    _filled : Double,
+    _remaining : Double,
+    _avg_fill_price : Double,
+    _perm_id : Int,
+    _parent_id : Int,
+    _last_fill_price : Double,
+    _client_id : Int,
+    _why_held : String,
   ) -> Unit {
     ()
   })
@@ -60,8 +60,8 @@ test "set_order_status_callback" {
 test "set_error_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_error_callback(client, fn(
-    code : ErrorCode,
-    msg : String,
+    _code : ErrorCode,
+    _msg : String,
   ) -> Unit {
     ()
   })
@@ -75,11 +75,11 @@ test "set_error_callback" {
 test "set_account_summary_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_account_summary_callback(client, fn(
-    req_id : Int,
-    account : String,
-    tag : String,
-    value : String,
-    currency : String,
+    _req_id : Int,
+    _account : String,
+    _tag : String,
+    _value : String,
+    _currency : String,
   ) -> Unit {
     ()
   })
@@ -93,10 +93,10 @@ test "set_account_summary_callback" {
 test "set_position_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_position_callback(client, fn(
-    account : String,
-    contract : Contract,
-    pos : Double,
-    avg_cost : Double,
+    _account : String,
+    _contract : Contract,
+    _pos : Double,
+    _avg_cost : Double,
   ) -> Unit {
     ()
   })
@@ -110,10 +110,10 @@ test "set_position_callback" {
 test "set_open_order_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_open_order_callback(client, fn(
-    order_id : Int,
-    contract : Contract,
-    order : Order,
-    order_state : OrderState,
+    _order_id : Int,
+    _contract : Contract,
+    _order : Order,
+    _order_state : OrderState,
   ) -> Unit {
     ()
   })
@@ -127,9 +127,9 @@ test "set_open_order_callback" {
 test "set_execution_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_execution_callback(client, fn(
-    req_id : Int,
-    contract : Contract,
-    execution : Execution,
+    _req_id : Int,
+    _contract : Contract,
+    _execution : Execution,
   ) -> Unit {
     ()
   })
@@ -143,9 +143,9 @@ test "set_execution_callback" {
 test "set_historical_data_callback" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_historical_data_callback(client, fn(
-    req_id : Int,
-    date : String,
-    bar : HistoricalDataBar,
+    _req_id : Int,
+    _date : String,
+    _bar : HistoricalDataBar,
   ) -> Unit {
     ()
   })
@@ -199,37 +199,37 @@ test "handle_unknown_message" {
 test "all_callbacks_can_be_set" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
   let client = set_error_callback(client, fn(
-    code : ErrorCode,
-    msg : String,
+    _code : ErrorCode,
+    _msg : String,
   ) -> Unit {
     ()
   })
   let client = set_tick_price_callback(client, fn(
-    req_id : Int,
-    tick_type : TickType,
-    price : Double,
-    size : Int64,
+    _req_id : Int,
+    _tick_type : TickType,
+    _price : Double,
+    _size : Int64,
   ) -> Unit {
     ()
   })
   let client = set_tick_size_callback(client, fn(
-    req_id : Int,
-    tick_type : TickType,
-    size : Int,
+    _req_id : Int,
+    _tick_type : TickType,
+    _size : Int,
   ) -> Unit {
     ()
   })
   let client = set_order_status_callback(client, fn(
-    order_id : Int,
-    status : String,
-    filled : Double,
-    remaining : Double,
-    avg_fill_price : Double,
-    perm_id : Int,
-    parent_id : Int,
-    last_fill_price : Double,
-    client_id : Int,
-    why_held : String,
+    _order_id : Int,
+    _status : String,
+    _filled : Double,
+    _remaining : Double,
+    _avg_fill_price : Double,
+    _perm_id : Int,
+    _parent_id : Int,
+    _last_fill_price : Double,
+    _client_id : Int,
+    _why_held : String,
   ) -> Unit {
     ()
   })
@@ -256,7 +256,7 @@ test "all_callbacks_can_be_set" {
 ///|
 test "handle_message_routes_to_correct_handler" {
   let client = new_client(connection_config("127.0.0.1", 7497, 1, None))
-  let test_routing = fn(msg_id : Int, buffer : Array[Byte]) -> Bool {
+  let test_routing = fn(_msg_id : Int, buffer : Array[Byte]) -> Bool {
     match handle_message(buffer, client) {
       Ok(_) => true
       Err(_) => false
