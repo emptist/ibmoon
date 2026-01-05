@@ -361,6 +361,18 @@ pub fn get_account_summary(api : IBApi, tags : String) -> Result[Int, ApiError] 
 }
 
 ///|
+// Get managed accounts
+pub fn get_managed_accounts(api : IBApi) -> Result[Unit, ApiError] {
+  if !api_is_connected(api) {
+    return Err(InvalidState("Not connected"))
+  }
+  match req_managed_accounts(api.client) {
+    Ok(_) => Ok(())
+    Err(e) => Err(ClientError("Failed to request managed accounts"))
+  }
+}
+
+///|
 // Get account value
 pub fn get_account_value(api : IBApi) -> Result[Unit, ApiError] {
   if !api_is_connected(api) {
@@ -652,6 +664,13 @@ pub fn on_historical_data(
   callback : (Int, String, HistoricalDataBar) -> Unit,
 ) -> IBApi {
   let new_client = set_historical_data_callback(api.client, callback)
+  { client: new_client }
+}
+
+///|
+// Set managed accounts callback
+pub fn on_managed_accounts(api : IBApi, callback : (String) -> Unit) -> IBApi {
+  let new_client = set_managed_accounts_callback(api.client, callback)
   { client: new_client }
 }
 

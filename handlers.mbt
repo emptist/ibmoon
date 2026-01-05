@@ -44,7 +44,7 @@ pub fn handle_message(
         10 => handle_account_download_end(dec, client)
         11 => handle_next_valid_id(dec, client)
         14 => handle_contract_data(dec, client)
-        15 => handle_execution_detail(dec, client)
+        15 => handle_managed_accounts(dec, client)
         17 => handle_contract_data_end(dec, client)
         18 => handle_open_order_end(dec, client)
         19 => handle_account_download_end(dec, client)
@@ -681,12 +681,14 @@ pub fn handle_next_valid_id(dec : Decoder, client : Client) -> (Client, Int) {
         on_account_summary: client.on_account_summary,
         on_position: client.on_position,
         on_historical_data: client.on_historical_data,
+        on_managed_accounts: client.on_managed_accounts,
       }
       let consumed = get_decoder_position(dec)
       (new_client, consumed)
     }
     Err(_) => (client, 0)
   }
+}
 
 ///|
 // Handle ManagedAccts message (message ID 15)
@@ -703,7 +705,6 @@ pub fn handle_managed_accounts(dec : Decoder, client : Client) -> (Client, Int) 
     }
     Err(_) => (client, 0)
   }
-}
 }
 
 ///|
