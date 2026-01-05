@@ -375,4 +375,46 @@ test "safe_operations_only" {
       ()
     }
   }
+
+test "request_managed_accounts_read_only" {
+  // Request managed accounts (read-only operation)
+  let config = connection_config("127.0.0.1", 7496, 1, None)
+  let client = new_client(config)
+  
+  match client_connect(client) {
+    Ok(client) => {
+      // Register callback to receive managed accounts
+      let client = set_managed_accounts_callback(
+        client,
+        fn(accounts_list : String) -> Unit {
+          // Callback invoked with accounts list
+          ()
+        }
+      )
+      
+      // Request managed accounts
+      match req_managed_accounts(client) {
+        Ok(client) => {
+          // Request sent successfully
+          // Process messages to receive managed accounts
+          match client_process_messages(client) {
+            Ok(_) => ()
+            Err(_) => ()
+          }
+        }
+        Err(_) => ()
+      }
+      
+      // Close connection
+      match client_disconnect(client) {
+        Ok(_) => ()
+        Err(_) => ()
+      }
+    }
+    Err(_) => {
+      // Connection failed - expected if API not running
+      ()
+    }
+  }
+}
 }
