@@ -340,10 +340,21 @@ let order = { order with
 
 ## Limitations
 
-- Socket communication requires FFI implementation (currently placeholder)
+- JavaScript FFI uses simplified synchronous wrapper (async operations require additional work)
+- WebAssembly FFI requires WASI-compliant runtime or JavaScript bridge
 - Some advanced IB API features may not be fully implemented
 - Testing requires running TWS/Gateway with paper trading account
 - Real-time message processing needs proper async/runtime support
+
+## FFI Implementations
+
+The library includes complete FFI infrastructure for socket communication across all target platforms:
+
+- **JavaScript**: Node.js `net` module implementation ([target/js/socket_impl.js](target/js/socket_impl.js))
+- **WebAssembly**: WASI and WebSocket support ([target/wasm/socket.wat](target/wasm/socket.wat))
+- **C**: POSIX and Winsock cross-platform implementation ([target/c/socket_impl.c](target/c/socket_impl.c))
+
+See [FFI_IMPLEMENTATIONS_SUMMARY.md](FFI_IMPLEMENTATIONS_SUMMARY.md) for detailed information about all FFI implementations, their current status, and integration requirements.
 
 ## Development
 
@@ -380,8 +391,12 @@ moon check
 - ✅ Encoding/decoding layer implemented
 - ✅ Connection manager with event handling
 - ✅ High-level API wrapper
-- ✅ Test suite (12/12 tests passing)
-- ⬜ Socket FFI implementation (placeholder)
+- ✅ Test suite (32/32 tests passing)
+- ✅ JavaScript FFI integration (Node.js)
+- ✅ WebAssembly FFI integration (WASI/WebSocket)
+- ✅ C FFI integration (POSIX/Winsock)
+- ✅ Target-specific socket implementations
+- ✅ FFI integration guide
 - ⬜ Full protocol message handlers
 - ⬜ Integration testing with IB server
 
@@ -410,6 +425,9 @@ This software is for educational and development purposes only. Trading financia
 - [IB API Documentation](https://interactivebrokers.github.io/)
 - [MoonBit Documentation](https://docs.moonbitlang.com)
 - [TWS API Guide](https://www.interactivebrokers.com/en/software/api/apiguide.htm)
+- [FFI Implementations Summary](FFI_IMPLEMENTATIONS_SUMMARY.md)
+- [Development Plan](DEVELOPMENT_PLAN.md)
+- [Contributing Guide](CONTRIBUTING.md)
 
 ## Support
 

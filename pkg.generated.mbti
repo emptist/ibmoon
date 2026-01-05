@@ -699,7 +699,7 @@ pub enum SecType {
 }
 
 pub struct Socket {
-  _opaque : Unit
+  socket_id : Int
 }
 
 pub enum SocketError {
@@ -708,6 +708,7 @@ pub enum SocketError {
   Closed
   Other(String)
 }
+pub fn SocketError::to_string(Self) -> String
 
 pub struct TickData {
   tick_type : TickType
