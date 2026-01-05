@@ -354,11 +354,11 @@ The library includes complete FFI infrastructure for socket communication across
 - **WebAssembly**: WASI and WebSocket support ([target/wasm/socket.wat](target/wasm/socket.wat))
 - **C**: POSIX and Winsock cross-platform implementation ([target/c/socket_impl.c](target/c/socket_impl.c))
 
-See [FFI_IMPLEMENTATIONS_SUMMARY.md](FFI_IMPLEMENTATIONS_SUMMARY.md) for detailed information about all FFI implementations, their current status, and integration requirements.
+See [docs/FFI_IMPLEMENTATIONS_SUMMARY.md](docs/FFI_IMPLEMENTATIONS_SUMMARY.md) for detailed information about all FFI implementations, their current status, and integration requirements.
 
 ## Development
 
-See [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) for detailed roadmap, architecture, and implementation phases.
+See [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) for detailed roadmap, architecture, and implementation phases.
 
 ### Running Tests
 
@@ -391,16 +391,16 @@ moon check
 - ✅ Encoding/decoding layer implemented
 - ✅ Connection manager with event handling
 - ✅ High-level API wrapper
-- ✅ Test suite (32/32 tests passing)
+- ✅ Test suite (56/56 tests passing)
 - ✅ JavaScript FFI integration (Node.js)
 - ✅ WebAssembly FFI integration (WASI/WebSocket)
 - ✅ C FFI integration (POSIX/Winsock)
 - ✅ Target-specific socket implementations
 - ✅ FFI integration guide
-- ⬜ Full protocol message handlers
-- ⬜ Integration testing with IB server
+- ✅ Message handlers for 100+ IB API message types
+- ✅ Integration tests with live IB API (read-only operations)
 
-See [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) for detailed roadmap and next steps.
+See [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) for detailed roadmap and next steps.
 
 ## Contributing
 
@@ -425,8 +425,11 @@ This software is for educational and development purposes only. Trading financia
 - [IB API Documentation](https://interactivebrokers.github.io/)
 - [MoonBit Documentation](https://docs.moonbitlang.com)
 - [TWS API Guide](https://www.interactivebrokers.com/en/software/api/apiguide.htm)
-- [FFI Implementations Summary](FFI_IMPLEMENTATIONS_SUMMARY.md)
-- [Development Plan](DEVELOPMENT_PLAN.md)
+- [FFI Implementations Summary](docs/FFI_IMPLEMENTATIONS_SUMMARY.md)
+- [Development Plan](docs/DEVELOPMENT_PLAN.md)
+- [Integration Tests Summary](docs/INTEGRATION_TESTS_SUMMARY.md)
+- [Project Completion Summary](docs/PROJECT_COMPLETION_SUMMARY.md)
+- [FFI Integration Guide](docs/FFI_INTEGRATION_GUIDE.md)
 - [Contributing Guide](CONTRIBUTING.md)
 
 ## Support
