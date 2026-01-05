@@ -1,9 +1,20 @@
 {
   "name": "username/ibmoon",
   "version": "0.1.0",
-  "readme": "README.mbt.md",
-  "repository": "",
+  "readme": "README.md",
+  "repository": "https://github.com/username/ibmoon",
   "license": "Apache-2.0",
-  "keywords": [],
-  "description": ""
+  "keywords": [
+    "trading",
+    "finance",
+    "interactive-brokers",
+    "tws",
+    "gateway",
+    "api",
+    "stock",
+    "forex",
+    "options",
+    "futures"
+  ],
+  "description": "A comprehensive MoonBit wrapper for Interactive Brokers TWS and Gateway API"
 }

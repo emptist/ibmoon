@@ -1,0 +1,810 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "username/ibmoon"
+
+// Values
+pub fn api_cancel_order(IBApi, Int) -> Result[Unit, ApiError]
+
+pub fn api_connect(IBApi) -> Result[IBApi, ApiError]
+
+pub fn api_disconnect(IBApi) -> Result[IBApi, ApiError]
+
+pub fn api_is_connected(IBApi) -> Bool
+
+pub fn api_process_messages(IBApi) -> Result[IBApi, ApiError]
+
+pub fn bar_size_to_string(BarSize) -> String
+
+pub fn cancel_market_data(Client, Int) -> Result[Client, ClientError]
+
+pub fn cancel_market_depth(Client, Int) -> Result[Client, ClientError]
+
+pub fn client_cancel_order(Client, Int) -> Result[Client, ClientError]
+
+pub fn client_connect(Client) -> Result[Client, ClientError]
+
+pub fn client_disconnect(Client) -> Result[Client, ClientError]
+
+pub fn client_is_connected(Client) -> Bool
+
+pub fn client_process_messages(Client) -> Result[Client, ClientError]
+
+pub fn close(Socket) -> Result[Unit, SocketError]
+
+pub fn connect(Address, Int) -> Result[Socket, SocketError]
+
+pub fn decoder_reset(Decoder) -> Decoder
+
+pub fn default_connect_options() -> ConnectOptions
+
+pub fn default_contract() -> Contract
+
+pub fn default_execution_filter() -> ExecutionFilter
+
+pub fn default_order() -> Order
+
+pub fn ensure_capacity(Encoder, Int) -> Encoder
+
+pub fn error_code_to_string(ErrorCode) -> String
+
+pub fn forex_contract(String, String, String) -> Contract
+
+pub fn futures_contract(String, String, String, String) -> Contract
+
+pub fn get_account_summary(IBApi, String) -> Result[Int, ApiError]
+
+pub fn get_account_value(IBApi) -> Result[Unit, ApiError]
+
+pub fn get_bytes(Encoder) -> Array[Byte]
+
+pub fn get_contract_details(IBApi, Contract) -> Result[Int, ApiError]
+
+pub fn get_current_time() -> Int64
+
+pub fn get_decoder_position(Decoder) -> Int
+
+pub fn get_executions(IBApi) -> Result[Unit, ApiError]
+
+pub fn get_historical_data(IBApi, Contract, String, String, BarSize, WhatToShow) -> Result[Int, ApiError]
+
+pub fn get_open_orders(IBApi) -> Result[Unit, ApiError]
+
+pub fn get_position(Encoder) -> Int
+
+pub fn get_positions(IBApi) -> Result[Unit, ApiError]
+
+pub fn get_state(Client) -> ConnectionState
+
+pub fn has_more(Decoder) -> Bool
+
+pub fn int_to_error_code(Int) -> ErrorCode
+
+pub fn new_client(ConnectionConfig) -> Client
+
+pub fn new_decoder(Array[Byte]) -> Decoder
+
+pub fn new_encoder(Int) -> Encoder
+
+pub fn new_ib_api(String, Int, Int) -> IBApi
+
+pub fn on_account_summary(IBApi, (Int, String, String, String, String) -> Unit) -> IBApi
+
+pub fn on_error(IBApi, (ErrorCode, String) -> Unit) -> IBApi
+
+pub fn on_execution(IBApi, (Int, Contract, Execution) -> Unit) -> IBApi
+
+pub fn on_historical_data(IBApi, (Int, String, HistoricalDataBar) -> Unit) -> IBApi
+
+pub fn on_open_order(IBApi, (Int, Contract, Order, OrderState) -> Unit) -> IBApi
+
+pub fn on_order_status(IBApi, (Int, String, Double, Double, Double, Int, Int, Double, Int, String) -> Unit) -> IBApi
+
+pub fn on_position(IBApi, (String, Contract, Double, Double) -> Unit) -> IBApi
+
+pub fn on_tick_price(IBApi, (Int, TickType, Double, Int64) -> Unit) -> IBApi
+
+pub fn on_tick_size(IBApi, (Int, TickType, Int) -> Unit) -> IBApi
+
+pub fn option_contract(String, String, Double, String, String, String) -> Contract
+
+pub fn order_action_to_string(OrderAction) -> String
+
+pub fn order_type_to_string(OrderType) -> String
+
+pub fn place_limit_order(IBApi, Contract, OrderAction, Double, Double) -> Result[Int, ApiError]
+
+pub fn place_market_order(IBApi, Contract, OrderAction, Double) -> Result[Int, ApiError]
+
+pub fn place_order(Client, Int, Contract, Order) -> Result[Client, ClientError]
+
+pub fn place_stop_order(IBApi, Contract, OrderAction, Double, Double) -> Result[Int, ApiError]
+
+pub fn read_bar_size(Decoder) -> Result[(BarSize, Decoder), DecodeError]
+
+pub fn read_bool(Decoder) -> Result[(Bool, Decoder), DecodeError]
+
+pub fn read_byte(Decoder) -> Result[(Byte, Decoder), DecodeError]
+
+pub fn read_contract(Decoder) -> Result[(Contract, Decoder), DecodeError]
+
+pub fn read_double(Decoder) -> Result[(Double, Decoder), DecodeError]
+
+pub fn read_error_code(Decoder) -> Result[(ErrorCode, Decoder), DecodeError]
+
+pub fn read_int(Decoder) -> Result[(Int, Decoder), DecodeError]
+
+pub fn read_max(Decoder) -> Result[(Bool, Decoder), DecodeError]
+
+pub fn read_string(Decoder) -> Result[(String, Decoder), DecodeError]
+
+pub fn read_tick_type(Decoder) -> Result[(TickType, Decoder), DecodeError]
+
+pub fn read_what_to_show(Decoder) -> Result[(WhatToShow, Decoder), DecodeError]
+
+pub fn receive(Socket, Int, Int) -> Result[Array[Byte], SocketError]
+
+pub fn remaining(Decoder) -> Int
+
+pub fn req_account_summary(Client, Int, String, String) -> Result[Client, ClientError]
+
+pub fn req_account_updates(Client, Bool, String) -> Result[Client, ClientError]
+
+pub fn req_contract_details(Client, Int, Contract) -> Result[Client, ClientError]
+
+pub fn req_executions(Client, Int, ExecutionFilter) -> Result[Client, ClientError]
+
+pub fn req_historical_data(Client, Int, Contract, String, String, BarSize, WhatToShow, Bool, Int, Bool) -> Result[Client, ClientError]
+
+pub fn req_ids(Client, Int) -> Result[Client, ClientError]
+
+pub fn req_market_data(Client, Int, Contract) -> Result[Client, ClientError]
+
+pub fn req_market_depth(Client, Int, Contract, Int) -> Result[Client, ClientError]
+
+pub fn req_open_orders(Client) -> Result[Client, ClientError]
+
+pub fn req_positions(Client) -> Result[Client, ClientError]
+
+pub fn request_next_order_id(IBApi) -> Result[Int, ApiError]
+
+pub fn reset(Encoder) -> Encoder
+
+pub fn sec_type_to_string(SecType) -> String
+
+pub fn send(Socket, Array[Byte]) -> Result[Unit, SocketError]
+
+pub fn set_account_summary_callback(Client, (Int, String, String, String, String) -> Unit) -> Client
+
+pub fn set_error_callback(Client, (ErrorCode, String) -> Unit) -> Client
+
+pub fn set_execution_callback(Client, (Int, Contract, Execution) -> Unit) -> Client
+
+pub fn set_historical_data_callback(Client, (Int, String, HistoricalDataBar) -> Unit) -> Client
+
+pub fn set_open_order_callback(Client, (Int, Contract, Order, OrderState) -> Unit) -> Client
+
+pub fn set_order_status_callback(Client, (Int, String, Double, Double, Double, Int, Int, Double, Int, String) -> Unit) -> Client
+
+pub fn set_position_callback(Client, (String, Contract, Double, Double) -> Unit) -> Client
+
+pub fn set_tick_price_callback(Client, (Int, TickType, Double, Int64) -> Unit) -> Client
+
+pub fn set_tick_size_callback(Client, (Int, TickType, Int) -> Unit) -> Client
+
+pub fn stock_contract(String, String, String) -> Contract
+
+pub fn string_to_sec_type(String) -> SecType?
+
+pub fn subscribe_market_data(IBApi, Contract) -> Result[Int, ApiError]
+
+pub fn time_in_force_to_string(TimeInForce) -> String
+
+pub fn unsubscribe_market_data(IBApi, Int) -> Result[Unit, ApiError]
+
+pub fn what_to_show_to_string(WhatToShow) -> String
+
+pub fn write_bool(Encoder, Bool) -> Encoder
+
+pub fn write_byte(Encoder, Byte) -> Encoder
+
+pub fn write_contract(Encoder, Contract) -> Encoder
+
+pub fn write_double(Encoder, Double) -> Encoder
+
+pub fn write_int(Encoder, Int) -> Encoder
+
+pub fn write_max(Encoder) -> Encoder
+
+pub fn write_order(Encoder, Order) -> Encoder
+
+pub fn write_string(Encoder, String) -> Encoder
+
+// Errors
+
+// Types and methods
+pub struct AccountSummary {
+  account : String
+  tag : String
+  value : String
+  currency : String
+}
+
+pub struct Address {
+  host : String
+  port : Int
+}
+
+pub enum ApiError {
+  ClientError(String)
+  InvalidState(String)
+  Timeout
+  NotFound
+}
+
+pub enum BarSize {
+  Sec1
+  Sec5
+  Sec15
+  Sec30
+  Min1
+  Min2
+  Min3
+  Min5
+  Min15
+  Min30
+  Hour1
+  Day1
+  Week1
+  Month1
+  Quarter1
+  Year1
+}
+
+pub struct Client {
+  config : ConnectionConfig
+  state : ConnectionState
+  socket : Socket?
+  server_version : Int
+  connection_time : Int64?
+  next_order_id : Int
+  on_error : ((ErrorCode, String) -> Unit)?
+  on_tick_price : ((Int, TickType, Double, Int64) -> Unit)?
+  on_tick_size : ((Int, TickType, Int) -> Unit)?
+  on_order_status : ((Int, String, Double, Double, Double, Int, Int, Double, Int, String) -> Unit)?
+  on_open_order : ((Int, Contract, Order, OrderState) -> Unit)?
+  on_execution : ((Int, Contract, Execution) -> Unit)?
+  on_account_summary : ((Int, String, String, String, String) -> Unit)?
+  on_position : ((String, Contract, Double, Double) -> Unit)?
+  on_historical_data : ((Int, String, HistoricalDataBar) -> Unit)?
+}
+
+pub enum ClientError {
+  ConnectionFailed(String)
+  NotConnected
+  AlreadyConnected
+  SendError(String)
+  ReceiveError(String)
+  InvalidParameter(String)
+}
+
+pub struct ConnectOptions {
+  read_only : Bool
+  reconnect_attempts : Int
+  reconnect_delay_ms : Int
+}
+
+pub struct ConnectionConfig {
+  host : String
+  port : Int
+  client_id : Int
+  connect_options : ConnectOptions?
+}
+
+pub enum ConnectionState {
+  Disconnected
+  Connecting
+  Connected
+  Disconnecting
+  Error(String)
+}
+
+pub struct Contract {
+  con_id : Int
+  symbol : String
+  sec_type : SecType
+  last_trade_date_or_contract_month : String
+  strike : Double
+  right : String
+  multiplier : String
+  exchange : String
+  primary_exchange : String
+  currency : String
+  local_symbol : String
+  trading_class : String
+  include_expired : Bool
+  sec_id_type : String
+  sec_id : String
+}
+
+pub enum DecodeError {
+  BufferOverflow
+  InvalidFormat(String)
+  UnexpectedEndOfInput
+  ParseError(String)
+}
+
+pub struct Decoder {
+  buffer : Array[Byte]
+  position : Int
+  length : Int
+}
+
+pub struct Encoder {
+  buffer : Array[Byte]
+  position : Int
+}
+
+pub enum ErrorCode {
+  NoError
+  Unknown
+  ConnectionRefused
+  InvalidMessage
+  ServerVersionNotSupported
+  ClientAlreadyConnected
+  ClientNotConnected
+  InvalidConnectionId
+  Unauthorized
+  InvalidSymbol
+  InvalidQuantity
+  InvalidOrderType
+  InvalidPrice
+  InvalidTimeInForce
+  InvalidExchange
+  OrderRejected
+  OrderCancelled
+  UnknownError(Int)
+}
+
+pub struct Execution {
+  order_id : Int
+  client_id : Int
+  exec_id : String
+  time : String
+  account : String
+  exchange : String
+  side : String
+  shares : Double
+  price : Double
+  perm_id : Int
+  client_id_ref : Int
+  order_ref : String
+  ev_rule : String
+  ev_multiplier : Double
+  model_code : String
+  last_liquidity : Int
+}
+
+pub struct ExecutionFilter {
+  client_id : Int
+  account_code : String
+  time : String
+  symbol : String
+  sec_type : String
+  exchange : String
+  side : String
+}
+
+pub struct HistoricalDataBar {
+  date : String
+  open : Double
+  high : Double
+  low : Double
+  close : Double
+  volume : Int
+  bar_count : Int
+  wap : Double
+  has_gaps : Bool
+}
+
+pub struct IBApi {
+  client : Client
+}
+
+pub struct MarketDepth {
+  position : Int
+  market_maker : String
+  operation : Int
+  side : Int
+  price : Double
+  size : Double
+}
+
+pub enum MessageType {
+  ReqMktData
+  CancelMktData
+  PlaceOrder
+  CancelOrder
+  ReqOpenOrders
+  ReqAccountUpdates
+  ReqExecutions
+  ReqIds
+  ReqContractDetails
+  ReqMktDepth
+  CancelMktDepth
+  ReqNewsBulletins
+  CancelNewsBulletins
+  SetServerLogLevel
+  ReqAutoOpenOrders
+  ReqAllOpenOrders
+  ReqManagedAccts
+  RequestFA
+  ReplaceFA
+  ReqHistoricalData
+  ExerciseOptions
+  ReqRealTimeBars
+  CancelRealTimeBars
+  CancelScannerSubscription
+  ReqScannerParameters
+  ReqScannerSubscription
+  ReqCurrentTime
+  ReqFundamentalData
+  CancelFundamentalData
+  ReqImpliedVolatility
+  ReqOptionParams
+  CancelImpliedVolatility
+  ReqPnL
+  CancelPnL
+  ReqPnLSingle
+  CancelPnLSingle
+  ReqAccountSummary
+  CancelAccountSummary
+  CancelPositions
+  VerifyRequest
+  VerifyMessage
+  QueryDisplayGroups
+  SubscribeToGroupEvents
+  UpdateDisplayGroup
+  UnsubscribeFromGroupEvents
+  StartApi
+  VerifyAndAuthRequest
+  VerifyAndAuthMessage
+  ReqPositions
+  ReqSecDefOptParams
+  ReqSoftDollarTiers
+  ReqFamilyCodes
+  ReqMatchingSymbols
+  ReqMktDepthExchanges
+  ReqSmartComponents
+  ReqNewsArticle
+  ReqNewsProviders
+  ReqHistoricalNews
+  ReqHeadTimestamp
+  ReqHistogramData
+  CancelHistogramData
+  CancelMarketData
+  CancelMarketDepth
+  CancelOrders
+  ReqMarketDataType
+  ReqPositionsMulti
+  CancelPositionsMulti
+  ReqAccountUpdatesMulti
+  CancelAccountUpdatesMulti
+  SecurityDefinitionOptionParameterReq
+  CancelSecurityDefinitionOptionParameter
+  VerifyAndAuthMessageJSON
+  ReqWshMetaData
+  CancelWshMetaData
+  ReqWshEventData
+  CancelWshEventData
+  ReqUserInfo
+  TickPrice
+  TickSize
+  OrderStatus
+  ErrMsg
+  OpenOrder
+  AcctValue
+  PortfolioValue
+  AcctUpdateTime
+  NextValidId
+  ContractData
+  ExecDetails
+  UpdateMktDepth
+  UpdateMktDepthL2
+  UpdateNewsBulletin
+  ManagedAccts
+  ReceiveFA
+  HistoricalData
+  ScannerParameters
+  ScannerData
+  TickOptionComputation
+  TickGeneric
+  TickString
+  TickEFP
+  CurrentTime
+  RealTimeBars
+  FundamentalData
+  ContractDataEnd
+  OpenOrderEnd
+  AcctDownloadEnd
+  ExecDetailsEnd
+  DeltaNeutralValidation
+  TickSnapshotEnd
+  MarketDataType
+  CommissionReport
+  Position
+  PositionEnd
+  AccountSummary
+  AccountSummaryEnd
+  VerifyMessageApi
+  DisplayGroupList
+  DisplayGroupUpdated
+  VerifyAndAuthMessageApi
+  PositionMulti
+  PositionMultiEnd
+  AccountUpdateMulti
+  AccountUpdateMultiEnd
+  SecurityDefinitionOptionParameter
+  SecurityDefinitionOptionParameterEnd
+  SoftDollarTiers
+  FamilyCodes
+  SymbolSamples
+  MktDepthExchanges
+  TickReqParams
+  SmartComponents
+  NewsArticle
+  TickNews
+  NewsProviders
+  HistoricalNews
+  HistoricalNewsEnd
+  HeadTimestamp
+  HistogramData
+  HistoricalDataUpdate
+  RerouteMktDataReq
+  RerouteMktDepthReq
+  MarketRule
+  PnL
+  PnLSingle
+  HistoricalTicks
+  HistoricalTicksBidAsk
+  HistoricalTicksLast
+  TickByTick
+  OrderBound
+  CompletedOrder
+  CompletedOrdersEnd
+  ReplaceFAEnd
+  WshMetaData
+  WshEventData
+  UserInfo
+}
+
+pub struct Order {
+  order_id : Int
+  client_id : Int
+  action : OrderAction
+  total_quantity : Double
+  order_type : OrderType
+  lmt_price : Double
+  aux_price : Double
+  time_in_force : TimeInForce
+  oca_group : String
+  oca_type : Int
+  account : String
+  open_close : String
+  origin : Int
+  transmit : Bool
+  parent_id : Int
+  block_order : Bool
+  sweep_to_fill : Bool
+  display_size : Int
+  trigger_method : Int
+  outside_rth : Bool
+  hidden : Bool
+  discretionary_amt : Double
+  good_after_time : String
+  good_till_date : String
+  fa_group : String
+  fa_method : String
+  fa_percentage : String
+  all_or_none : Bool
+  min_qty : Int
+  percent_offset : Double
+  eTrade_only : Bool
+  firm_quote_only : Bool
+  nbbo_price_cap : Double
+  opt_out_smart_routing : Bool
+  scale_init_level_size : Int
+  scale_subs_level_size : Int
+  scale_price_increment : Double
+  scale_price_adjust_value : Double
+  scale_price_adjust_interval : Int
+  scale_profit_offset : Double
+  scale_auto_reset : Bool
+  scale_init_position : Int
+  scale_init_fill_qty : Int
+  scale_random_percent : Bool
+  hedge_type : String
+  hedge_param : String
+  algo_strategy : String
+  algo_params : Array[(String, String)]
+  smart_combo_routing_params : Array[(String, String)]
+  what_if : Bool
+  not_held : Bool
+}
+
+pub enum OrderAction {
+  Buy
+  Sell
+  SSHORT
+  SSHORTX
+}
+
+pub struct OrderState {
+  status : String
+  init_margin : String
+  maint_margin : String
+  equity_with_loan : String
+  commission : Double
+  min_commission : Double
+  max_commission : Double
+  commission_currency : String
+  warning_text : String
+}
+
+pub enum OrderType {
+  Market
+  Limit
+  Stop
+  StopLimit
+  MarketOnClose
+  LimitOnClose
+  MarketOnOpen
+  LimitOnOpen
+  Trail
+  TrailLimit
+  Relative
+  Pegged
+}
+
+pub struct PortfolioItem {
+  account : String
+  contract : Contract
+  position : Double
+  market_price : Double
+  market_value : Double
+  average_cost : Double
+  unrealized_pnl : Double
+  realized_pnl : String
+  account_name : String
+}
+
+pub enum ProtocolError {
+  InvalidFormat(String)
+  MissingField(String)
+  ParseError(String)
+  UnknownMessageType(Int)
+}
+
+pub enum SecType {
+  Stock
+  Option
+  Future
+  Forex
+  Bond
+  CFD
+  FutureOption
+  MutualFund
+  Warrant
+  StructuredProduct
+  Index
+  Commodity
+}
+
+pub struct Socket {
+  _opaque : Unit
+}
+
+pub enum SocketError {
+  ConnectionRefused
+  Timeout
+  Closed
+  Other(String)
+}
+
+pub struct TickData {
+  tick_type : TickType
+  price : Double
+  size : Int
+  timestamp : Int64
+}
+
+pub enum TickType {
+  BidSize
+  BidPrice
+  AskPrice
+  AskSize
+  LastPrice
+  LastSize
+  High
+  Low
+  Volume
+  Close
+  BidOptionComputation
+  AskOptionComputation
+  LastOptionComputation
+  ModelOption
+  Open
+  Low13Week
+  High13Week
+  Low26Week
+  High26Week
+  Low52Week
+  High52Week
+  AvgVolume
+  OpenInterest
+  OptionHistoricalVol
+  OptionImpliedVol
+  OptionBidExch
+  OptionAskExch
+  OptionCallOpenInterest
+  OptionPutOpenInterest
+  OptionCallVolume
+  OptionPutVolume
+  IndexFuturePremium
+  BidExch
+  AskExch
+  AuctionVolume
+  AuctionPrice
+  AuctionImbalance
+  MarkPrice
+  BidEFPComputation
+  AskEFPComputation
+  LastEFPComputation
+  OpenEFPComputation
+  HighEFPComputation
+  LowEFPComputation
+  CloseEFPComputation
+  LastTimestamp
+  Shortable
+  FundamentalRatios
+  RTVolume
+  HALTED
+  BidYield
+  AskYield
+  LastYield
+  CustOptionComputation
+  TradeCount
+  TradeRate
+  VolumeRate
+  LastRTHTrade
+  RT_HistoricalVol
+  IBDividends
+  BondFactorMultipliers
+  RT_TradeVolume
+  RT_TradeRate
+}
+
+pub enum TimeInForce {
+  Day
+  GTC
+  OPG
+  IOC
+  FOK
+  GTX
+  GTD
+}
+
+pub enum WhatToShow {
+  Trades
+  Midpoint
+  Bid
+  Ask
+  BidAsk
+  HistoricalVolatility
+  OptionImpliedVolatility
+  FeeRate
+  AggregateVolume
+}
+
+// Type aliases
+
+// Traits
+

@@ -1,4 +1,11 @@
 ///|
+// IB API Example
+// Demonstrates basic usage of ibmoon library
+
+///|
 fn main {
-  println(@lib.fib(10))
+  println("IB MoonBit API Wrapper")
+  println(
+    "This is a placeholder - actual implementation requires FFI for socket operations",
+  )
 }
