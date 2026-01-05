@@ -31,6 +31,7 @@ pub struct Client {
   on_account_summary : ((Int, String, String, String, String) -> Unit)?
   on_position : ((String, Contract, Double, Double) -> Unit)?
   on_historical_data : ((Int, String, HistoricalDataBar) -> Unit)?
+  on_managed_accounts : ((String) -> Unit)?
 }
 
 ///|
@@ -61,6 +62,7 @@ pub fn new_client(config : ConnectionConfig) -> Client {
     on_account_summary: None,
     on_position: None,
     on_historical_data: None,
+    on_managed_accounts: None,
   }
 }
 
@@ -101,6 +103,7 @@ pub fn client_connect(client : Client) -> Result[Client, ClientError] {
                         on_account_summary: client.on_account_summary,
                         on_position: client.on_position,
                         on_historical_data: client.on_historical_data,
+                        on_managed_accounts: client.on_managed_accounts,
                       }
                       Ok(new_client)
                     }
@@ -142,6 +145,7 @@ pub fn client_disconnect(client : Client) -> Result[Client, ClientError] {
             on_account_summary: client.on_account_summary,
             on_position: client.on_position,
             on_historical_data: client.on_historical_data,
+            on_managed_accounts: client.on_managed_accounts,
           }
           Ok(new_client)
         }
@@ -504,6 +508,22 @@ pub fn req_account_summary(
 }
 
 ///|
+// Request managed accounts
+pub fn req_managed_accounts(client : Client) -> Result[Client, ClientError] {
+  match client.socket {
+    Some(sock) => {
+      let enc = new_encoder(256)
+      let enc = write_int(enc, 17) // Message type: REQ_MANAGED_ACCTS
+      match send(sock, get_bytes(enc)) {
+        Ok(_) => Ok(client)
+        Err(e) => Err(SendError("Failed to request managed accounts"))
+      }
+    }
+    None => Err(NotConnected)
+  }
+}
+
+///|
 // Set error callback
 pub fn set_error_callback(
   client : Client,
@@ -525,6 +545,7 @@ pub fn set_error_callback(
     on_account_summary: client.on_account_summary,
     on_position: client.on_position,
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -550,6 +571,7 @@ pub fn set_tick_price_callback(
     on_account_summary: client.on_account_summary,
     on_position: client.on_position,
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -575,6 +597,7 @@ pub fn set_tick_size_callback(
     on_account_summary: client.on_account_summary,
     on_position: client.on_position,
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -611,6 +634,7 @@ pub fn set_order_status_callback(
     on_account_summary: client.on_account_summary,
     on_position: client.on_position,
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -636,6 +660,7 @@ pub fn set_open_order_callback(
     on_account_summary: client.on_account_summary,
     on_position: client.on_position,
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -661,6 +686,7 @@ pub fn set_execution_callback(
     on_account_summary: client.on_account_summary,
     on_position: client.on_position,
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -686,6 +712,7 @@ pub fn set_account_summary_callback(
     on_account_summary: Some(callback),
     on_position: client.on_position,
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -711,6 +738,7 @@ pub fn set_position_callback(
     on_account_summary: client.on_account_summary,
     on_position: Some(callback),
     on_historical_data: client.on_historical_data,
+    on_managed_accounts: client.on_managed_accounts,
   }
 }
 
@@ -736,6 +764,33 @@ pub fn set_historical_data_callback(
     on_account_summary: client.on_account_summary,
     on_position: client.on_position,
     on_historical_data: Some(callback),
+    on_managed_accounts: client.on_managed_accounts,
+  }
+}
+
+///|
+// Set managed accounts callback
+pub fn set_managed_accounts_callback(
+  client : Client,
+  callback : (String) -> Unit,
+) -> Client {
+  {
+    config: client.config,
+    state: client.state,
+    socket: client.socket,
+    server_version: client.server_version,
+    connection_time: client.connection_time,
+    next_order_id: client.next_order_id,
+    on_error: client.on_error,
+    on_tick_price: client.on_tick_price,
+    on_tick_size: client.on_tick_size,
+    on_order_status: client.on_order_status,
+    on_open_order: client.on_open_order,
+    on_execution: client.on_execution,
+    on_account_summary: client.on_account_summary,
+    on_position: client.on_position,
+    on_historical_data: client.on_historical_data,
+    on_managed_accounts: Some(callback),
   }
 }
 

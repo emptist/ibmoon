@@ -687,6 +687,23 @@ pub fn handle_next_valid_id(dec : Decoder, client : Client) -> (Client, Int) {
     }
     Err(_) => (client, 0)
   }
+
+///|
+// Handle ManagedAccts message (message ID 15)
+pub fn handle_managed_accounts(dec : Decoder, client : Client) -> (Client, Int) {
+  match read_string(dec) {
+    Ok((accounts_list, dec)) => {
+      // Invoke callback if set
+      match client.on_managed_accounts {
+        Some(callback) => callback(accounts_list)
+        None => ()
+      }
+      let consumed = get_decoder_position(dec)
+      (client, consumed)
+    }
+    Err(_) => (client, 0)
+  }
+}
 }
 
 ///|
