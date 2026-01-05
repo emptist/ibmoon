@@ -753,13 +753,23 @@ pub fn client_process_messages(client : Client) -> Result[Client, ClientError] {
   match client.socket {
     Some(sock) =>
       match receive(sock, 4096, 1000) {
-        Ok(buffer) => {
-          let dec = new_decoder(buffer)
-          // Parse message and invoke appropriate callbacks
-          // This is a simplified version - full implementation would
-          // parse all message types
-          Ok(client)
-        }
+        Ok(buffer) =>
+          // Use handlers to process the message
+          match handle_message(buffer, client) {
+            Ok((new_client, consumed)) =>
+              // Successfully processed the message
+              // In a real implementation, we might have multiple messages in one buffer
+              // and would need to handle them sequentially
+              Ok(new_client)
+            Err(msg) => {
+              // Failed to process message
+              match client.on_error {
+                Some(callback) => callback(UnknownError(0), msg)
+                None => ()
+              }
+              Ok(client)
+            }
+          }
         Err(e) =>
           // Timeout is expected when no data is available
           match e {

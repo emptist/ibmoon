@@ -32,9 +32,13 @@ pub fn close(Socket) -> Result[Unit, SocketError]
 
 pub fn connect(Address, Int) -> Result[Socket, SocketError]
 
+pub fn connection_config(String, Int, Int, ConnectOptions?) -> ConnectionConfig
+
 pub fn decoder_reset(Decoder) -> Decoder
 
 pub fn default_connect_options() -> ConnectOptions
+
+pub fn default_connection_config() -> ConnectionConfig
 
 pub fn default_contract() -> Contract
 
@@ -73,6 +77,136 @@ pub fn get_position(Encoder) -> Int
 pub fn get_positions(IBApi) -> Result[Unit, ApiError]
 
 pub fn get_state(Client) -> ConnectionState
+
+pub fn handle_account_download_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_account_summary(Decoder, Client) -> (Client, Int)
+
+pub fn handle_account_summary_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_account_update_multi(Decoder, Client) -> (Client, Int)
+
+pub fn handle_account_update_multi_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_account_update_time(Decoder, Client) -> (Client, Int)
+
+pub fn handle_account_value(Decoder, Client) -> (Client, Int)
+
+pub fn handle_commission_report(Decoder, Client) -> (Client, Int)
+
+pub fn handle_completed_order(Decoder, Client) -> (Client, Int)
+
+pub fn handle_completed_orders_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_contract_data(Decoder, Client) -> (Client, Int)
+
+pub fn handle_contract_data_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_current_time(Decoder, Client) -> (Client, Int)
+
+pub fn handle_error(Decoder, Client) -> (Client, Int)
+
+pub fn handle_execution_detail(Decoder, Client) -> (Client, Int)
+
+pub fn handle_execution_detail_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_family_codes(Decoder, Client) -> (Client, Int)
+
+pub fn handle_head_timestamp(Decoder, Client) -> (Client, Int)
+
+pub fn handle_histogram_data(Decoder, Client) -> (Client, Int)
+
+pub fn handle_historical_data_update(Decoder, Client) -> (Client, Int)
+
+pub fn handle_historical_news(Decoder, Client) -> (Client, Int)
+
+pub fn handle_historical_news_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_historical_ticks(Decoder, Client) -> (Client, Int)
+
+pub fn handle_historical_ticks_bid_ask(Decoder, Client) -> (Client, Int)
+
+pub fn handle_historical_ticks_last(Decoder, Client) -> (Client, Int)
+
+pub fn handle_market_data_type(Decoder, Client) -> (Client, Int)
+
+pub fn handle_market_depth_exchanges(Decoder, Client) -> (Client, Int)
+
+pub fn handle_market_rule(Decoder, Client) -> (Client, Int)
+
+pub fn handle_message(Array[Byte], Client) -> Result[(Client, Int), String]
+
+pub fn handle_news_article(Decoder, Client) -> (Client, Int)
+
+pub fn handle_news_providers(Decoder, Client) -> (Client, Int)
+
+pub fn handle_next_valid_id(Decoder, Client) -> (Client, Int)
+
+pub fn handle_open_order(Decoder, Client) -> (Client, Int)
+
+pub fn handle_open_order_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_order_bound(Decoder, Client) -> (Client, Int)
+
+pub fn handle_order_status(Decoder, Client) -> (Client, Int)
+
+pub fn handle_pnl(Decoder, Client) -> (Client, Int)
+
+pub fn handle_pnl_single(Decoder, Client) -> (Client, Int)
+
+pub fn handle_portfolio_value(Decoder, Client) -> (Client, Int)
+
+pub fn handle_position(Decoder, Client) -> (Client, Int)
+
+pub fn handle_position_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_position_multi(Decoder, Client) -> (Client, Int)
+
+pub fn handle_position_multi_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_replace_fa_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_reroute_market_data(Decoder, Client) -> (Client, Int)
+
+pub fn handle_reroute_market_depth(Decoder, Client) -> (Client, Int)
+
+pub fn handle_security_definition_option_parameter(Decoder, Client) -> (Client, Int)
+
+pub fn handle_security_definition_option_parameter_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_smart_components(Decoder, Client) -> (Client, Int)
+
+pub fn handle_soft_dollar_tiers(Decoder, Client) -> (Client, Int)
+
+pub fn handle_symbol_samples(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_by_tick(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_efp(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_generic(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_news(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_option_computation(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_price(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_req_params(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_size(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_snapshot_end(Decoder, Client) -> (Client, Int)
+
+pub fn handle_tick_string(Decoder, Client) -> (Client, Int)
+
+pub fn handle_unknown_message(Int, Decoder, Client) -> (Client, Int)
+
+pub fn handle_user_info(Decoder, Client) -> (Client, Int)
+
+pub fn handle_wsh_event_data(Decoder, Client) -> (Client, Int)
+
+pub fn handle_wsh_meta_data(Decoder, Client) -> (Client, Int)
 
 pub fn has_more(Decoder) -> Bool
 
@@ -391,6 +525,11 @@ pub struct ExecutionFilter {
   sec_type : String
   exchange : String
   side : String
+}
+
+pub struct HandlerResult {
+  consumed_bytes : Int
+  processed : Bool
 }
 
 pub struct HistoricalDataBar {

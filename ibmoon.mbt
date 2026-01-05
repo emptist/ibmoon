@@ -12,6 +12,21 @@ pub struct ConnectionConfig {
 }
 
 ///|
+pub fn default_connection_config() -> ConnectionConfig {
+  { host: "127.0.0.1", port: 7497, client_id: 1, connect_options: None }
+}
+
+///|
+pub fn connection_config(
+  host : String,
+  port : Int,
+  client_id : Int,
+  connect_options : ConnectOptions?,
+) -> ConnectionConfig {
+  { host, port, client_id, connect_options }
+}
+
+///|
 pub struct ConnectOptions {
   read_only : Bool
   reconnect_attempts : Int
