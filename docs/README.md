@@ -24,6 +24,10 @@ This directory contains comprehensive documentation for the IB MoonBit Wrapper p
 ### Testing Documentation
 - **[INTEGRATION_TESTS_SUMMARY.md](INTEGRATION_TESTS_SUMMARY.md)** - Integration tests with live IB API (read-only operations)
 
+### Examples and Tutorials
+- **[ACCOUNT_SUMMARY_EXAMPLE.md](ACCOUNT_SUMMARY_EXAMPLE.md)** - Example code for retrieving account summary data
+- **[MANAGED_ACCOUNTS_EXAMPLE.md](MANAGED_ACCOUNTS_EXAMPLE.md)** - Example code for retrieving all account IDs
+
 ### Project Management
 - **[AGENTS.md](AGENTS.md)** - Agent task list and assignment tracking
 
@@ -31,6 +35,8 @@ This directory contains comprehensive documentation for the IB MoonBit Wrapper p
 
 ### For Users
 - Start with [Main README](../README.md) for installation and usage
+- See [Account Summary Example](ACCOUNT_SUMMARY_EXAMPLE.md) for account data retrieval
+- See [Managed Accounts Example](MANAGED_ACCOUNTS_EXAMPLE.md) for retrieving account IDs
 - See [Integration Tests Summary](INTEGRATION_TESTS_SUMMARY.md) for testing with live API
 - Check [Project Completion Summary](PROJECT_COMPLETION_SUMMARY.md) for project status
 
@@ -79,6 +85,8 @@ docs/
 ├── HANDLERS_DOCUMENTATION.md          # Message handlers docs
 ├── SOCKET_TESTS_SUMMARY.md            # Socket tests docs
 ├── INTEGRATION_TESTS_SUMMARY.md       # Integration tests docs
+├── ACCOUNT_SUMMARY_EXAMPLE.md         # Account summary example
+├── MANAGED_ACCOUNTS_EXAMPLE.md        # Managed accounts example
 └── AGENTS.md                         # Agent task list
 ```
 
