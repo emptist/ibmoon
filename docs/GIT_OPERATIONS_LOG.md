@@ -368,3 +368,76 @@ If you see errors about nested repositories:
 1. Check `.git` directories: `find . -name .git -type d`
 2. Ensure test projects are not subdirectories of ibmoon
 3. Each project should be a sibling directory at the same level
+
+## Package Publishing Status
+
+**Status**: Login required (cannot be automated - requires interactive terminal)
+
+**Issue**: The `moon login` command requires an interactive terminal and cannot be executed through the command line tool.
+
+**Error Encountered**:
+```bash
+$ moon login
+IO error: not a terminal
+error: failed to run `moon login`
+```
+
+## Manual Steps Required
+
+The following steps must be performed manually by the user in their terminal:
+
+### Step 1: Login to MoonBit Package Registry
+```bash
+moon login
+```
+This will prompt for MoonBit account credentials.
+
+### Step 2: Publish Library Packages
+After successful login, publish each library package:
+
+```bash
+# Publish JavaScript/Node.js library
+cd ../ibmoonjs
+moon publish
+
+# Publish WebAssembly library
+cd ../ibmoonwa
+moon publish
+
+# Publish C/Native library
+cd ../ibmoonc
+moon publish
+```
+
+### Step 3: Build and Run Test Projects
+After packages are published, the test projects can be built and tested:
+
+```bash
+# Test JavaScript/Node.js
+cd ../ibmoon_tests_js
+moon build --target js
+moon run --target js ./cmd/main
+
+# Test WebAssembly
+cd ../ibmoon_tests_wa
+moon build --target wasm
+moon run --target wasm ./cmd/main
+
+# Test C/Native
+cd ../ibmoon_tests_c
+moon build --target native
+moon run --target native ./cmd/main
+```
+
+### Step 4: Real-World Testing
+Ensure IB TWS or Gateway is running on port 7496, then run the examples to connect to live IB API.
+
+## Summary
+
+All git operations are complete:
+- ✅ All repositories initialized with correct remotes
+- ✅ All package configurations updated
+- ✅ All test projects pushed to GitHub
+- ✅ Documentation committed and pushed
+- ⏳ Package publishing requires manual `moon login` and `moon publish` commands
+- ⏳ Real-world testing can begin after packages are published
