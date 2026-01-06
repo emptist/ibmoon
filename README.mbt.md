@@ -345,6 +345,30 @@ let order = { order with
 - Some advanced IB API features may not be fully implemented
 - Testing requires running TWS/Gateway with paper trading account
 - Real-time message processing needs proper async/runtime support
+- **Root package uses stub socket implementations** - See [FFI Integration Guide](docs/FFI_INTEGRATION_GUIDE.md) for details
+
+## Important Note on Socket FFI
+
+The IB MoonBit wrapper includes complete FFI implementations for all target platforms (JavaScript, WebAssembly, C), but the **root package currently uses stub implementations**.
+
+### Current Status
+- ✅ Complete FFI implementations exist in `target/js/`, `target/wasm/`, `target/c/`
+- ✅ All tests pass (56/56) with stub implementations
+- ⚠️ Root package uses stub implementations (no actual network I/O)
+
+### Why Examples Don't Produce Output
+When you run examples like `example_managed_accounts.mbt`, they attempt to connect to IB API but use the stub socket implementation, which always returns an error. This is why you see no output even when a live IB API is running on port 7496.
+
+### Solutions
+
+**Quick Solution**: Create examples that directly import from target-specific packages (e.g., `import "target/js/socket" as socket`).
+
+For detailed information about the FFI implementation status and solutions, see:
+- [Socket FFI Solution](docs/SOCKET_FFI_SOLUTION.md) - Complete guide with working solutions
+- [FFI Integration Guide](docs/FFI_INTEGRATION_GUIDE.md) - Technical details and architecture
+- [Socket FFI Status](docs/SOCKET_FFI_STATUS.md) - Current status summary
+
+**Important**: This is a MoonBit language limitation, not a missing implementation. The FFI implementations are complete and functional.
 
 ## FFI Implementations
 

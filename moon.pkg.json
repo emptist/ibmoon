@@ -1,11 +1,21 @@
 {
     "is-builtin": false,
     "link": {
-        "wasm": {},
-        "wasm-gc": {},
-        "js": {},
-        "c": {},
-        "c-jemalloc": {}
+        "wasm": {
+            "path": "target/wasm/socket.wat"
+        },
+        "wasm-gc": {
+            "path": "target/wasm/socket.wat"
+        },
+        "js": {
+            "path": "target/js/socket_impl.js"
+        },
+        "c": {
+            "path": "target/c/socket_impl.c"
+        },
+        "c-jemalloc": {
+            "path": "target/c/socket_impl.c"
+        }
     },
     "import": [],
     "test-import": []

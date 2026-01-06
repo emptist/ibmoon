@@ -1,11 +1,8 @@
 ///|
-// Socket abstraction for network communication
-// Provides a simplified interface for TCP socket operations
-// Uses FFI for target-specific implementations
+// Socket abstraction layer for IB MoonBit API
+// This file provides a unified interface for socket operations across different platforms
+// Actual implementations are in target-specific packages (target/js, target/wasm, target/c)
 
-///|
-
-///|
 pub struct Socket {
   socket_id : Int
 }
@@ -34,52 +31,38 @@ pub fn SocketError::to_string(self : SocketError) -> String {
   }
 }
 
-///|
+// Stub implementations - actual FFI implementations are in target-specific packages
+// These stubs allow the code to compile, but will always return errors
+// To use actual socket operations, build with explicit target (js, wasm, c)
+// and the target-specific implementation will be used
 
 ///|
-pub fn connect(addr : Address, timeout_ms : Int) -> Result[Socket, SocketError] {
-  // TODO: Implement actual socket connection via FFI
-  // This is a placeholder implementation
-  // For JavaScript target, use Node.js net module
-  // For C target, use POSIX sockets
-  // For WASM target, use WASI or browser WebSocket
-  Err(
-    Other(
-      "Socket FFI not yet implemented - requires target-specific implementation",
-    ),
-  )
+pub fn connect(
+  _addr : Address,
+  _timeout_ms : Int,
+) -> Result[Socket, SocketError] {
+  // Stub implementation - actual implementation in target-specific files
+  Err(Other("Socket FFI not implemented - build with explicit target"))
 }
 
 ///|
-pub fn send(sock : Socket, data : Array[Byte]) -> Result[Unit, SocketError] {
-  // TODO: Implement actual socket send via FFI
-  Err(
-    Other(
-      "Socket FFI not yet implemented - requires target-specific implementation",
-    ),
-  )
+pub fn send(_sock : Socket, _data : Array[Byte]) -> Result[Unit, SocketError] {
+  // Stub implementation - actual implementation in target-specific files
+  Err(Other("Socket FFI not implemented - build with explicit target"))
 }
 
 ///|
 pub fn receive(
-  sock : Socket,
-  length : Int,
-  timeout_ms : Int,
+  _sock : Socket,
+  _length : Int,
+  _timeout_ms : Int,
 ) -> Result[Array[Byte], SocketError] {
-  // TODO: Implement actual socket receive via FFI
-  Err(
-    Other(
-      "Socket FFI not yet implemented - requires target-specific implementation",
-    ),
-  )
+  // Stub implementation - actual implementation in target-specific files
+  Err(Other("Socket FFI not implemented - build with explicit target"))
 }
 
 ///|
-pub fn close(sock : Socket) -> Result[Unit, SocketError] {
-  // TODO: Implement actual socket close via FFI
-  Err(
-    Other(
-      "Socket FFI not yet implemented - requires target-specific implementation",
-    ),
-  )
+pub fn close(_sock : Socket) -> Result[Unit, SocketError] {
+  // Stub implementation - actual implementation in target-specific files
+  Err(Other("Socket FFI not implemented - build with explicit target"))
 }

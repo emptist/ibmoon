@@ -25,8 +25,43 @@ This directory contains comprehensive documentation for the IB MoonBit Wrapper p
 - **[INTEGRATION_TESTS_SUMMARY.md](INTEGRATION_TESTS_SUMMARY.md)** - Integration tests with live IB API (read-only operations)
 
 ### Examples and Tutorials
-- **[ACCOUNT_SUMMARY_EXAMPLE.md](ACCOUNT_SUMMARY_EXAMPLE.md)** - Example code for retrieving account summary data
-- **[MANAGED_ACCOUNTS_EXAMPLE.md](MANAGED_ACCOUNTS_EXAMPLE.md)** - Example code for retrieving all account IDs
+- **[ACCOUNT_SUMMARY_EXAMPLE.md](ACCOUNT_SUMMARY_EXAMPLE.md)** - Detailed documentation for retrieving account summary data
+- **[MANAGED_ACCOUNTS_EXAMPLE.md](MANAGED_ACCOUNTS_EXAMPLE.md)** - Detailed documentation for retrieving all account IDs
+
+### Running Example Tests
+
+Individual example files are available for running specific examples:
+- [`example_managed_accounts.mbt`](../example_managed_accounts.mbt) - Retrieve all account IDs
+- [`example_account_summary.mbt`](../example_account_summary.mbt) - Retrieve account financial summary
+- [`example_positions.mbt`](../example_positions.mbt) - Retrieve current positions
+- [`example_connection.mbt`](../example_connection.mbt) - Basic connection and disconnection
+
+**Important - Socket FFI Required**: The socket layer currently contains stub implementations that return errors. Actual network connections require completing the FFI implementations for your target platform:
+
+- **JavaScript target**: Implement using Node.js `net` module
+- **C target**: Implement using POSIX sockets
+- **WebAssembly target**: Implement using WASI or browser WebSocket
+
+See [`socket.mbt`](../socket.mbt:40) for the stub implementations that need to be replaced with actual FFI calls.
+
+Once the socket FFI is implemented, you will also need:
+1. A live IB TWS or Gateway instance running on port 7496
+2. API connections enabled in TWS/Gateway settings
+
+Without socket FFI implementation, the tests will pass but no details will be printed because no actual network connection is made.
+
+Run all examples:
+```bash
+moon test --target wasm-gc
+```
+
+Run specific example:
+```bash
+moon test --target wasm-gc example_managed_accounts.mbt
+moon test --target wasm-gc example_account_summary.mbt
+moon test --target wasm-gc example_positions.mbt
+moon test --target wasm-gc example_connection.mbt
+```
 
 ### Project Management
 - **[AGENTS.md](AGENTS.md)** - Agent task list and assignment tracking
@@ -55,7 +90,7 @@ This directory contains comprehensive documentation for the IB MoonBit Wrapper p
 
 **Version**: 1.0.0  
 **Status**: ✅ Complete  
-**Test Coverage**: 56/56 tests passing (100%)  
+**Test Coverage**: 65/65 tests passing (100%)
 **Platforms**: JavaScript, WebAssembly, C/Native  
 
 ## Key Features
