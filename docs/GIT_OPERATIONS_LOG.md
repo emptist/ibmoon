@@ -369,6 +369,22 @@ If you see errors about nested repositories:
 2. Ensure test projects are not subdirectories of ibmoon
 3. Each project should be a sibling directory at the same level
 
+### Library Project Package Import Fixes (2026-01-06)
+
+**Issue**: Library projects' `cmd/main/moon.pkg.json` files had incorrect import paths using `username/*` instead of `emptist/*`.
+
+**Files Fixed**:
+- `../ibmoonjs/cmd/main/moon.pkg.json` - Changed from `username/ibmoonjs` to `emptist/ibmoonjs`
+- `../ibmoonwa/cmd/main/moon.pkg.json` - Changed from `username/ibmoonwa` to `emptist/ibmoonwa`
+- `../ibmoonc/cmd/main/moon.pkg.json` - Changed from `username/ibmoonc` to `emptist/ibmoonc`
+
+**Commits**:
+- ibmoonjs: df91bff
+- ibmoonwa: 23dd772
+- ibmoonc: bae3ac6
+
+**Status**: All fixes pushed to GitHub
+
 ## Package Publishing Status
 
 **Status**: Login required (cannot be automated - requires interactive terminal)
