@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "username/ibmoon"
+package "emptist/ibmoon"
 
 // Values
 pub fn api_cancel_order(IBApi, Int) -> Result[Unit, ApiError]
@@ -70,6 +70,8 @@ pub fn get_executions(IBApi) -> Result[Unit, ApiError]
 
 pub fn get_historical_data(IBApi, Contract, String, String, BarSize, WhatToShow) -> Result[Int, ApiError]
 
+pub fn get_managed_accounts(IBApi) -> Result[Unit, ApiError]
+
 pub fn get_open_orders(IBApi) -> Result[Unit, ApiError]
 
 pub fn get_position(Encoder) -> Int
@@ -127,6 +129,8 @@ pub fn handle_historical_ticks(Decoder, Client) -> (Client, Int)
 pub fn handle_historical_ticks_bid_ask(Decoder, Client) -> (Client, Int)
 
 pub fn handle_historical_ticks_last(Decoder, Client) -> (Client, Int)
+
+pub fn handle_managed_accounts(Decoder, Client) -> (Client, Int)
 
 pub fn handle_market_data_type(Decoder, Client) -> (Client, Int)
 
@@ -228,6 +232,8 @@ pub fn on_execution(IBApi, (Int, Contract, Execution) -> Unit) -> IBApi
 
 pub fn on_historical_data(IBApi, (Int, String, HistoricalDataBar) -> Unit) -> IBApi
 
+pub fn on_managed_accounts(IBApi, (String) -> Unit) -> IBApi
+
 pub fn on_open_order(IBApi, (Int, Contract, Order, OrderState) -> Unit) -> IBApi
 
 pub fn on_order_status(IBApi, (Int, String, Double, Double, Double, Int, Int, Double, Int, String) -> Unit) -> IBApi
@@ -290,6 +296,8 @@ pub fn req_historical_data(Client, Int, Contract, String, String, BarSize, WhatT
 
 pub fn req_ids(Client, Int) -> Result[Client, ClientError]
 
+pub fn req_managed_accounts(Client) -> Result[Client, ClientError]
+
 pub fn req_market_data(Client, Int, Contract) -> Result[Client, ClientError]
 
 pub fn req_market_depth(Client, Int, Contract, Int) -> Result[Client, ClientError]
@@ -313,6 +321,8 @@ pub fn set_error_callback(Client, (ErrorCode, String) -> Unit) -> Client
 pub fn set_execution_callback(Client, (Int, Contract, Execution) -> Unit) -> Client
 
 pub fn set_historical_data_callback(Client, (Int, String, HistoricalDataBar) -> Unit) -> Client
+
+pub fn set_managed_accounts_callback(Client, (String) -> Unit) -> Client
 
 pub fn set_open_order_callback(Client, (Int, Contract, Order, OrderState) -> Unit) -> Client
 
@@ -409,6 +419,7 @@ pub struct Client {
   on_account_summary : ((Int, String, String, String, String) -> Unit)?
   on_position : ((String, Contract, Double, Double) -> Unit)?
   on_historical_data : ((Int, String, HistoricalDataBar) -> Unit)?
+  on_managed_accounts : ((String) -> Unit)?
 }
 
 pub enum ClientError {
