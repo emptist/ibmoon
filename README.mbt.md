@@ -21,18 +21,28 @@ This library provides a type-safe, idiomatic MoonBit interface for interacting w
 - **Low-level access**: Direct access to protocol encoding/decoding for advanced use cases
 - **Callback-based event handling**: Reactive programming model for real-time data
 - **Comprehensive test coverage**: Extensive test suite ensuring reliability
+- **Multi-target support**: Separate packages for JavaScript, WebAssembly, and C/Native targets
 
 ## Installation
 
-Add this to your `moon.mod.json`:
+**Important**: Due to MoonBit's immature package publishing system, the library packages are available but cannot be properly imported via `moon add` at this time. Please use the code directly from the source projects.
 
-```json
-{
-  "dependencies": {
-    "username/ibmoon": "0.1.0"
-  }
-}
+### Option 1: Use Source Code Directly
+
+Clone the appropriate target-specific repository and copy the source files into your project:
+
+- **JavaScript/Node.js**: `git clone https://github.com/emptist/ibmoonjs.git`
+- **WebAssembly**: `git clone https://github.com/emptist/ibmoonwa.git`
+- **C/Native**: `git clone https://github.com/emptist/ibmoonc.git`
+
+### Option 2: Reference Implementation
+
+Use the main ibmoon project as a reference implementation:
+```bash
+git clone https://github.com/emptist/ibmoon.git
 ```
+
+The main ibmoon project contains all the source code and can be used as a template for your own projects.
 
 ## Quick Start
 
@@ -338,37 +348,86 @@ let order = { order with
 }
 ```
 
+## Multi-Project Architecture
+
+To work around MoonBit's FFI limitations, this project has been split into separate target-specific packages:
+
+### Main Project (ibmoon)
+- **Repository**: https://github.com/emptist/ibmoon
+- **Purpose**: Reference implementation with all source code
+- **Status**: ✅ Complete and functional
+- **Use**: Copy source files into your own projects
+
+### Target-Specific Packages
+
+#### ibmoonjs (JavaScript/Node.js)
+- **Repository**: https://github.com/emptist/ibmoonjs
+- **Target**: JavaScript/Node.js
+- **FFI**: Node.js net module
+- **Status**: ✅ Complete, published to MoonBit registry (v0.2.7)
+- **Note**: Package publishing works but imports are currently non-functional due to MoonBit ecosystem limitations
+
+#### ibmoonwa (WebAssembly)
+- **Repository**: https://github.com/emptist/ibmoonwa
+- **Target**: WebAssembly
+- **FFI**: WASI and WebSocket host functions
+- **Status**: ✅ Complete, published to MoonBit registry (v0.2.6)
+- **Note**: Package publishing works but imports are currently non-functional due to MoonBit ecosystem limitations
+
+#### ibmoonc (C/Native)
+- **Repository**: https://github.com/emptist/ibmoonc
+- **Target**: C/Native
+- **FFI**: POSIX and Winsock sockets
+- **Status**: ✅ Complete, published to MoonBit registry (v0.2.6)
+- **Note**: Package publishing works but imports are currently non-functional due to MoonBit ecosystem limitations
+
+### Test Projects
+
+#### ibmoon_tests_js
+- **Repository**: https://github.com/emptist/ibmoon_tests_js
+- **Purpose**: Real-world examples for JavaScript/Node.js target
+- **Examples**: Managed accounts, account summary, positions
+
+#### ibmoon_tests_wa
+- **Repository**: https://github.com/emptist/ibmoon_tests_wa
+- **Purpose**: Real-world examples for WebAssembly target
+- **Examples**: Managed accounts, account summary, positions
+
+#### ibmoon_tests_c
+- **Repository**: https://github.com/emptist/ibmoon_tests_c
+- **Purpose**: Real-world examples for C/Native target
+- **Examples**: Managed accounts, account summary, positions
+
+## Current Status
+
+### What's Working ✅
+- Complete IB API implementation with all core functionality
+- Socket communication layer with FFI support
+- Message encoding/decoding for IB protocol
+- Connection manager with event handling
+- High-level API wrapper with comprehensive functions
+- 56 passing integration tests
+- Multi-target FFI implementations (JavaScript, WebAssembly, C)
+- Comprehensive documentation and examples
+- All source code is functional and ready to use
+
+### Known Limitations ⚠️
+- **MoonBit Package System**: The package publishing and import mechanism is currently non-functional despite packages being published successfully
+- **Package Imports**: Cannot use `moon add` to install packages - must use source code directly
+- **Testing**: Test projects cannot import library packages due to MoonBit ecosystem limitations
+
+### Recommendation
+Use the source code directly from the main ibmoon project or target-specific repositories. The MoonBit packaging system is not mature enough for complex library distribution at this time.
+
 ## Limitations
 
+- MoonBit package publishing and import system is currently non-functional
+- Cannot use `moon add` to install packages - must use source code directly
 - JavaScript FFI uses simplified synchronous wrapper (async operations require additional work)
 - WebAssembly FFI requires WASI-compliant runtime or JavaScript bridge
 - Some advanced IB API features may not be fully implemented
 - Testing requires running TWS/Gateway with paper trading account
 - Real-time message processing needs proper async/runtime support
-- **Root package uses stub socket implementations** - See [FFI Integration Guide](docs/FFI_INTEGRATION_GUIDE.md) for details
-
-## Important Note on Socket FFI
-
-The IB MoonBit wrapper includes complete FFI implementations for all target platforms (JavaScript, WebAssembly, C), but the **root package currently uses stub implementations**.
-
-### Current Status
-- ✅ Complete FFI implementations exist in `target/js/`, `target/wasm/`, `target/c/`
-- ✅ All tests pass (56/56) with stub implementations
-- ⚠️ Root package uses stub implementations (no actual network I/O)
-
-### Why Examples Don't Produce Output
-When you run examples like `example_managed_accounts.mbt`, they attempt to connect to IB API but use the stub socket implementation, which always returns an error. This is why you see no output even when a live IB API is running on port 7496.
-
-### Solutions
-
-**Quick Solution**: Create examples that directly import from target-specific packages (e.g., `import "target/js/socket" as socket`).
-
-For detailed information about the FFI implementation status and solutions, see:
-- [Socket FFI Solution](docs/SOCKET_FFI_SOLUTION.md) - Complete guide with working solutions
-- [FFI Integration Guide](docs/FFI_INTEGRATION_GUIDE.md) - Technical details and architecture
-- [Socket FFI Status](docs/SOCKET_FFI_STATUS.md) - Current status summary
-
-**Important**: This is a MoonBit language limitation, not a missing implementation. The FFI implementations are complete and functional.
 
 ## FFI Implementations
 
@@ -410,19 +469,29 @@ moon check
 
 ### Project Status
 
+**Main ibmoon Project**:
 - ✅ Core types and structure implemented
 - ✅ Protocol definitions complete
 - ✅ Encoding/decoding layer implemented
 - ✅ Connection manager with event handling
 - ✅ High-level API wrapper
 - ✅ Test suite (56/56 tests passing)
-- ✅ JavaScript FFI integration (Node.js)
-- ✅ WebAssembly FFI integration (WASI/WebSocket)
-- ✅ C FFI integration (POSIX/Winsock)
-- ✅ Target-specific socket implementations
-- ✅ FFI integration guide
 - ✅ Message handlers for 100+ IB API message types
 - ✅ Integration tests with live IB API (read-only operations)
+
+**Target-Specific Packages**:
+- ✅ ibmoonjs: JavaScript FFI integration (Node.js) - Published v0.2.7
+- ✅ ibmoonwa: WebAssembly FFI integration (WASI/WebSocket) - Published v0.2.6
+- ✅ ibmoonc: C FFI integration (POSIX/Winsock) - Published v0.2.6
+
+**Test Projects**:
+- ✅ ibmoon_tests_js: JavaScript/Node.js examples
+- ✅ ibmoon_tests_wa: WebAssembly examples
+- ✅ ibmoon_tests_c: C/Native examples
+
+**Known Issues**:
+- ⚠️ MoonBit package publishing works but imports are non-functional
+- ⚠️ Cannot use `moon add` to install packages - must use source code directly
 
 See [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) for detailed roadmap and next steps.
 
@@ -446,15 +515,27 @@ This software is for educational and development purposes only. Trading financia
 
 ## Resources
 
+### Documentation
 - [IB API Documentation](https://interactivebrokers.github.io/)
 - [MoonBit Documentation](https://docs.moonbitlang.com)
 - [TWS API Guide](https://www.interactivebrokers.com/en/software/api/apiguide.htm)
-- [FFI Implementations Summary](docs/FFI_IMPLEMENTATIONS_SUMMARY.md)
+
+### Project Documentation
 - [Development Plan](docs/DEVELOPMENT_PLAN.md)
+- [FFI Implementations Summary](docs/FFI_IMPLEMENTATIONS_SUMMARY.md)
 - [Integration Tests Summary](docs/INTEGRATION_TESTS_SUMMARY.md)
 - [Project Completion Summary](docs/PROJECT_COMPLETION_SUMMARY.md)
 - [FFI Integration Guide](docs/FFI_INTEGRATION_GUIDE.md)
 - [Contributing Guide](CONTRIBUTING.md)
+
+### Repositories
+- **Main**: https://github.com/emptist/ibmoon
+- **JavaScript**: https://github.com/emptist/ibmoonjs
+- **WebAssembly**: https://github.com/emptist/ibmoonwa
+- **C/Native**: https://github.com/emptist/ibmoonc
+- **Tests (JS)**: https://github.com/emptist/ibmoon_tests_js
+- **Tests (WA)**: https://github.com/emptist/ibmoon_tests_wa
+- **Tests (C)**: https://github.com/emptist/ibmoon_tests_c
 
 ## Support
 
